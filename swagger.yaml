@@ -1,0 +1,45 @@
+tags:
+- name: message
+  description: message API
+
+paths:
+  /message:
+    post:
+      tags:
+      - message
+      summary: Retrieve Message Context
+      parameters:
+      - name: body
+        in: body
+        description: Context Matching
+        required: true
+        schema:
+          $ref: '#/definitions/message'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  message:
+    type: object
+    required:
+        - conversation_id
+        - message
+    properties:
+      conversation_id:
+        type: string
+        description: conversation id
+      message:
+        type: string
+        description: message
+
+schemes:
+ - https
+ - http

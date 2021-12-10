@@ -1,0 +1,11 @@
+# Message API
+
+###
+# Context Matching
+POST http://localhost:3000/message
+Content-Type: application/json
+
+{
+  "conversation_id": "abcd123",
+  "message": "Hello, I’m John"
+}
