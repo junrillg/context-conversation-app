@@ -50,5 +50,15 @@ describe('Testing Message', () => {
         .send(messageData)
         .expect(200, { response_id: 'abcd123', response: 'Sorry, I don’t understand.' });
     });
+
+    it('Should return 400 for missing conversation_id or message', async () => {
+      const messageRoute = new MessageRoute();
+      const app = new App([messageRoute]);
+
+      return request(app.getServer())
+        .post(`${messageRoute.path}`)
+        .send()
+        .expect(400, { message: 'conversation_id must be a string, message must be a string' });
+    });
   });
 });
