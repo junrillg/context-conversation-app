@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import MessageController from '@controllers/message.controller';
 import { Routes } from '@interfaces/routes.interface';
+import validationMiddleware from '@middlewares/validation.middleware';
+import { MessageDto } from '@/dtos/message.dto';
 
 class MessageRoute implements Routes {
   public path = '/message';
@@ -12,7 +14,7 @@ class MessageRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}`, this.messageController.getContext);
+    this.router.post(`${this.path}`, validationMiddleware(MessageDto, 'body'), this.messageController.getContext);
   }
 }
 
